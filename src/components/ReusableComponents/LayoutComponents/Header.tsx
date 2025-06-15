@@ -5,7 +5,8 @@ import { User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, CloudLightning } from "lucide-react";
+import PurpleIcon from "../PurpleIcon";
 
 type Props = { user: User };
 
@@ -13,7 +14,7 @@ const Header = ({ user }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
   return (
-    <div className="w-full px-4 pt-10 sticky top-10 z-10 flex justify-between items-center flex-wrap gap-4 bg-background">
+    <div className="w-full px-4 pt-10 sticky flex justify-between items-center flex-wrap gap-4 bg-background">
       {pathname.includes("pipeline") ? (
         <Button
           className="bg-primary/10 border border-border rounded-xl"
@@ -27,6 +28,11 @@ const Header = ({ user }: Props) => {
           {pathname.split("/")[1]}
         </div>
       )}
+      <div className="flex gap-6 items-center flex-wrap">
+        <PurpleIcon>
+          <CloudLightning />
+        </PurpleIcon>
+      </div>
     </div>
   );
 };

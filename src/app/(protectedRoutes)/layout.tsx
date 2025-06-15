@@ -14,12 +14,17 @@ const layout = async ({ children }: Props) => {
     redirect("/");
   }
   return (
-    <div className="flex w-full mih-h-screen">
+    <div className="flex min-h-screen">
+      {/* Sidebar stays on the side */}
       <Sidebar />
 
-      <Header user={userExists.user} />
-      <div className="flex flex-col w-full h-screen overflow-auto px-4 scrollbar-hide container mx-auto">
-        {children}
+      {/* Main content area */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        <Header user={userExists.user} />
+
+        <div className="flex-1 overflow-auto px-4 scrollbar-hide container mx-auto">
+          {children}
+        </div>
       </div>
     </div>
   );

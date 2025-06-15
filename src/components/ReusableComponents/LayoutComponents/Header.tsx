@@ -7,6 +7,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, CloudLightning } from "lucide-react";
 import PurpleIcon from "../PurpleIcon";
+import CreateWebinarButton from "../CreateWebinarComponent";
 
 type Props = { user: User };
 
@@ -14,7 +15,7 @@ const Header = ({ user }: Props) => {
   const pathname = usePathname();
   const router = useRouter();
   return (
-    <div className="w-full px-4 pt-10 sticky flex justify-between items-center flex-wrap gap-4 bg-background">
+    <div className="w-full px-4 py-4 sticky flex justify-between items-center flex-wrap gap-4 bg-background">
       {pathname.includes("pipeline") ? (
         <Button
           className="bg-primary/10 border border-border rounded-xl"
@@ -32,6 +33,8 @@ const Header = ({ user }: Props) => {
         <PurpleIcon>
           <CloudLightning />
         </PurpleIcon>
+
+        <CreateWebinarButton />
       </div>
     </div>
   );

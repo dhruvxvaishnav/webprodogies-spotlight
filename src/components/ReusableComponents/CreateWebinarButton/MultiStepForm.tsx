@@ -158,7 +158,7 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
                         >
                           {step.title}
                         </motion.h3>
-                        <p className="text-sm text-grey-500">
+                        <p className="text-sm text-gray-500">
                           {step.description}
                         </p>
                       </div>
@@ -185,7 +185,7 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
             >
               <div className="mb-6">
                 <h2 className="text-xl font-semibold">{currentStep.title}</h2>
-                <p className="text-grey-400">{currentStep.description}</p>
+                <p className="text-gray-400">{currentStep.description}</p>
               </div>
               {currentStep.component}
 

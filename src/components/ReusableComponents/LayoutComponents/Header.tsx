@@ -7,7 +7,7 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, CloudLightning } from "lucide-react";
 import PurpleIcon from "../PurpleIcon";
-import CreateWebinarButton from "../CreateWebinarComponent";
+import CreateWebinarButton from "../CreateWebinarButton";
 
 type Props = { user: User };
 

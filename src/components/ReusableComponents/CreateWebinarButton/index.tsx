@@ -10,13 +10,35 @@ import {
 } from "@/components/ui/dialog";
 import { useWebinarStore } from "@/store/useWebinarStore";
 import { PlusIcon } from "lucide-react";
-import React from "react";
+
+import React, { useState } from "react";
+import MultiStepForm from "./MultiStepForm";
+import BasicInfoStep from "./BasicInfoStep";
 
 type Props = {};
 
 const CreateWebinarButton = (props: Props) => {
   const { isModalOpen, setModalOpen, isComplete, setComplete } =
     useWebinarStore();
+
+  const [webinarLink, setWebinarLink] = useState("");
+
+  const steps = [
+    {
+      id: "basicInfo",
+      title: "Basic Information",
+      description:
+        "Please Fill Out The Basic Information Needed For Your Webinar",
+      component: <BasicInfoStep />,
+    },
+  ];
+
+  const handleComplete = (webinarId: string) => {
+    setComplete(true);
+    setWebinarLink(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/live-webinar/${webinarId}`
+    );
+  };
   return (
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
       <DialogTrigger asChild>

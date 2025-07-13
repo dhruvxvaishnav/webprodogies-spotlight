@@ -82,17 +82,36 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
 
   return (
     <div className="flex flex-col justify-center items-center bg-[#27272A]/20 border border-border rounded-3xl overflow-hidden max-w-6xl mx-auto backdrop-blur-[106px]">
-      <div className="flex items-center justify-start">
+      <div className="flex items-center justify-start w-full">
         <div className="w-full md:w-1/3 p-6">
-          <div className="space-y-6">
+          <div className="space-y-8">
             {steps.map((step, index) => {
               const isCompleted = completedSteps.includes(step.id);
               const isCurrent = index === currentStepIndex;
               const isPast = index < currentStepIndex;
               return (
                 <div className="relative" key={index}>
+                  {/* Connecting Line */}
+                  {index < steps.length - 1 && (
+                    <div className="absolute left-4 top-8 w-0.5 h-24 bg-gray-700 overflow-hidden">
+                      <motion.div
+                        initial={{
+                          height: isPast || isCompleted ? "100%" : "0%",
+                        }}
+                        animate={{
+                          height: isPast || isCompleted ? "100%" : "0%",
+                          backgroundColor: "rgb(147,51,234)",
+                        }}
+                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                        className="w-full h-full"
+                      />
+                    </div>
+                  )}
+
+                  {/* Step Content */}
                   <div className="flex items-start gap-4">
-                    <div className="relative">
+                    {/* Step Circle */}
+                    <div className="relative flex-shrink-0">
                       <motion.div
                         className="flex items-center justify-center w-8 h-8 rounded-full z-10"
                         initial={false}
@@ -130,38 +149,25 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
                           )}
                         </AnimatePresence>
                       </motion.div>
-                      {index < steps.length - 1 && (
-                        <div className="absolute top-8 left-4 w-0.5 h-16 bg-gray-700 overflow-hidden">
-                          <motion.div
-                            initial={{
-                              height: isPast || isCompleted ? "100%" : "0%",
-                            }}
-                            animate={{
-                              height: isPast || isCompleted ? "100%" : "0%",
-                              backgroundColor: "rgb(147,51,234)",
-                            }}
-                            transition={{ duration: 0.5, ease: "easeInOut" }}
-                            className="w-full h-full"
-                          ></motion.div>
-                        </div>
-                      )}
-                      <div className="pt-1">
-                        <motion.h3
-                          animate={{
-                            color:
-                              isCurrent || isCompleted
-                                ? "rgb(255,255,255)"
-                                : "rgb(156,163,175)",
-                          }}
-                          transition={{ duration: 0.3 }}
-                          className="font-medium"
-                        >
-                          {step.title}
-                        </motion.h3>
-                        <p className="text-sm text-gray-500">
-                          {step.description}
-                        </p>
-                      </div>
+                    </div>
+
+                    {/* Step Info */}
+                    <div className="flex-1 min-w-0">
+                      <motion.h3
+                        animate={{
+                          color:
+                            isCurrent || isCompleted
+                              ? "rgb(255,255,255)"
+                              : "rgb(156,163,175)",
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="font-medium text-base"
+                      >
+                        {step.title}
+                      </motion.h3>
+                      <p className="text-sm text-gray-500 mt-1 leading-relaxed">
+                        {step.description}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -169,10 +175,12 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
             })}
           </div>
         </div>
+
         <Separator
           orientation="vertical"
-          className="data-[orientation=vertical]:h-1/2"
+          className="data-[orientation=vertical]:h-[500px]"
         />
+
         <div className="w-full md:w-2/3">
           <AnimatePresence mode="wait">
             <motion.div
@@ -199,6 +207,7 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
           </AnimatePresence>
         </div>
       </div>
+
       <div className="w-full p-6 flex justify-between">
         <Button
           variant={"outline"}

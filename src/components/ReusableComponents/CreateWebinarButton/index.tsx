@@ -14,6 +14,9 @@ import { PlusIcon } from "lucide-react";
 import React, { useState } from "react";
 import MultiStepForm from "./MultiStepForm";
 import BasicInfoStep from "./BasicInfoStep";
+import { de } from "date-fns/locale";
+import CTAStep from "./CTAStep";
+import AdditionalInfoStep from "./AdditionalInfoStep";
 
 type Props = {};
 
@@ -30,6 +33,24 @@ const CreateWebinarButton = (props: Props) => {
       description:
         "Please Fill Out The Basic Information Needed For Your Webinar",
       component: <BasicInfoStep />,
+    },
+    {
+      id: "cta",
+      title: "CTA",
+      description:
+        "Please Provide The End-Point For Your Customer Through Your Webinar",
+      component: (
+        <CTAStep
+        // assistants={[]} stripeProducts={[]}
+        />
+      ),
+    },
+    {
+      id: "additionalInfo",
+      title: "Additional Information",
+      description:
+        "Please Provide Any Additional Information Needed For Your Webinar",
+      component: <AdditionalInfoStep />,
     },
   ];
 
